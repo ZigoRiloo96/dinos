@@ -23,9 +23,11 @@ public class SpriteCloner : MonoBehaviour
     {
         transform.position = m_InTransform.position;
 
-        if (m_OutSpriteRenderer.sprite == m_InSpriteRenderer.sprite && FillColor.a == m_InSpriteRenderer.color.a) return;
+        if (m_OutSpriteRenderer.sprite == m_InSpriteRenderer.sprite && FillColor.a == m_InSpriteRenderer.color.a && m_OutSpriteRenderer.flipX != m_InSpriteRenderer.flipX) return;
 
         FillColor.a = m_InSpriteRenderer.color.a;
+
+        m_OutSpriteRenderer.flipX = m_InSpriteRenderer.flipX;
 
         m_OutSpriteRenderer.material.SetColor("_Color", FillColor);
 

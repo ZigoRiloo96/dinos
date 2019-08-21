@@ -1,4 +1,5 @@
 ﻿
+using System.Collections;
 using UnityEngine;
 
 namespace riloo
@@ -14,10 +15,10 @@ namespace riloo
 
         private int SpeedAnimatorId;
 
-        // public SpriteAnimationScript animationScript;
         public Animator m_Animatior;
 
         public float m_Speed = 1f;
+        private float currentSpeed = 1f;
 
         private Vector2 direction;
         private Vector3 velocity;
@@ -34,14 +35,28 @@ namespace riloo
 
         public int m_PlayerID;
 
+        private bool dash = false;
+        public float DashTime = 2f;
+
+        private void Start()
+        {
+            currentSpeed = m_Speed;
+        }
+
         private void Update()
         {
             if (!m_Animatior.GetCurrentAnimatorStateInfo(0).IsTag("action"))
             {
                 if (RewiredInputModule.GetButtonDown(m_PlayerID, RewiredConsts.Action.Game_Attack_1) || RewiredInputModule.GetButtonDown(RewiredConsts.Action.Game_Attack_1))
                 {
-                    // attack
                     m_Animatior.SetTrigger("Attack");
+                }
+
+                if (!dash && RewiredInputModule.GetButtonDown(m_PlayerID, RewiredConsts.Action.Game_Dash))
+                {
+                    dash = true;
+                    currentSpeed = m_Speed * 2f;
+                    StartCoroutine(dashEnd());
                 }
 
                 direction = RewiredInputModule.GetAxis2D(m_PlayerID, RewiredConsts.Action.Game_MoveHorizontal, RewiredConsts.Action.Game_MoveVertical);
@@ -57,13 +72,10 @@ namespace riloo
                     inputDir.y = direction.y > 0f ? 1 : direction.y < 0f ? -1 : 0;
                 }
 
-                //
                 if (direction != prev_direction)
                 {
-                    //animationScript.PlayAnimationByDirection(direction, inputDir);
-                    m_Animatior.SetFloat(SpeedAnimatorId, inputDir.magnitude);
+                    m_Animatior.SetFloat(SpeedAnimatorId, dash ? inputDir.magnitude * 2 : inputDir.magnitude);
                 }
-                //
 
                 flip = direction.x > 0f ? false : direction.x < 0f ? true : prevFlip;
 
@@ -75,11 +87,9 @@ namespace riloo
 
                 prev_direction = direction;
 
-                velocity = direction * m_Speed;
+                velocity = direction * currentSpeed;
 
-                //transform.position += velocity * Time.fixedDeltaTime;
-
-                rb.velocity = velocity; //* Time.fixedDeltaTime;
+                rb.velocity = velocity;
             }
             else
             {
@@ -87,6 +97,13 @@ namespace riloo
                 prev_direction = Vector2.zero;
                 rb.velocity = prev_direction;
             }
+        }
+
+        private IEnumerator dashEnd()
+        {
+            yield return new WaitForSeconds(DashTime);
+            currentSpeed = m_Speed;
+            dash = false;
         }
     }
 

@@ -167,7 +167,10 @@ MonoBehaviour:
       _name: System
       _descriptiveName: System
       _startPlaying: 1
-      _defaultJoystickMaps: []
+      _defaultJoystickMaps:
+      - _enabled: 1
+        _categoryId: 1
+        _layoutId: 0
       _defaultMouseMaps: []
       _defaultKeyboardMaps:
       - _enabled: 1
@@ -584,7 +587,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 8
+        _actionId: -1
         _elementType: 1
         _elementIdentifierId: 7
         _axisRange: 0
@@ -595,7 +598,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 9
+        _actionId: 11
         _elementType: 1
         _elementIdentifierId: 8
         _axisRange: 0
@@ -606,7 +609,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 11
+        _actionId: -1
         _elementType: 1
         _elementIdentifierId: 4
         _axisRange: 0
@@ -617,7 +620,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 10
+        _actionId: 8
         _elementType: 1
         _elementIdentifierId: 5
         _axisRange: 0

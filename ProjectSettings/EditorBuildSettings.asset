@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/test.unity
+    path: Assets/riloo/Scenes/Game/Init.unity
+    guid: 005e6282613468240a16cd6570988bfb
+  - enabled: 1
+    path: Assets/riloo/Scenes/Game/MainMenu.unity
+    guid: 771483f5bdd976b4296e420fb0846fa4
+  - enabled: 1
+    path: Assets/riloo/Scenes/test.unity
     guid: b0e4601fa55006d4c93b257c7969580a
   m_configObjects: {}

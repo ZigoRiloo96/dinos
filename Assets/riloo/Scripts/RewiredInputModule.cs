@@ -14,23 +14,18 @@ namespace riloo
         {
             system_player = ReInput.players.GetPlayer(RewiredConsts.Player.System);
 
-            for (int i = 0; i < ReInput.controllers.Joysticks.Count; i++)
-            {
-                ReInput.players.Players[i].controllers.AddController(ReInput.controllers.Joysticks[i], true);
-            }
+            OnConnect();
 
-            //Rewired.ReInput.ControllerDisconnectedEvent += OnDisconnect;
             Rewired.ReInput.ControllerConnectedEvent += OnConnect;
         }
 
-        //private void OnDisconnect(ControllerStatusChangedEventArgs _args)
-        //{
-        //}
-
-        private void OnConnect(ControllerStatusChangedEventArgs _args)
+        private void OnConnect(ControllerStatusChangedEventArgs _args = null)
         {
             for (int i = 0; i < ReInput.controllers.Joysticks.Count; i++)
             {
+                //Debug.Log(i + " ControllerId: " + ReInput.controllers.Joysticks[i].systemId + " id: " + ReInput.controllers.Joysticks[i].id +
+                //    " unityId: " + ReInput.controllers.Joysticks[i].unityId);
+
                 ReInput.players.Players[i].controllers.AddController(ReInput.controllers.Joysticks[i], true); 
             }
         }

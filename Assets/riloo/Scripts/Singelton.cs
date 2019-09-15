@@ -7,16 +7,22 @@ namespace riloo
     {
         public static T Instance = null;
 
-        void Start()
+        void Awake()
         {
+            if (Instance != null)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
             if (Instance == null)
             {
                 Instance = FindObjectOfType<T>();
             }
-            else if (Instance == this)
-            {
-                Destroy(gameObject);
-            }
+            //else if (Instance == this)
+            //{
+            //    Destroy(gameObject);
+            //}
 
             DontDestroyOnLoad(gameObject);
 
